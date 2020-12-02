@@ -1,0 +1,42 @@
+html, body {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.wrapper {
+  height: 100vh;
+  width: auto;
+  display: grid;
+  grid-template: auto 1fr auto / 1fr;
+}
+
+.display-bar {
+  background-color: rgb(36, 192, 140);
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+main {
+  background-color: rgb(226, 170, 92);
+}
+
+.card-container {
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(153, 153, 229);
+  padding: 2em;
+  margin: 1.5em;
+  max-height: 200px;
+  border: 2px solid black;
+  border-radius: 1em;
+}

@@ -9,7 +9,15 @@ Project for Odin to practice basic object construction
 - [ ] Input form
 - [ ] Read toggle
 - [ ] Delete button
-- [ ] Hook up library to local storage (probably do this at the end, unless it's useful for testing?)
+- [x] Hook up library to local storage (probably do this at the end, unless it's useful for testing?)
+- [ ] Update storage when an entry is added
+
+### Bonus Features
+
+- [ ] Add firebase (plus option to choose?)
+- [ ] Add a view toggle (table / card)
+- [ ] Fully responsive
+- [ ] Recipie version with links and ratings
 
 Think about app flow.
 * Button is clicked

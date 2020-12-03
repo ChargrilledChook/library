@@ -12,6 +12,15 @@ const saveLibrary = function saveLibraryToLocalStorage() {
   localStorage.setItem("library", JSON.stringify(myLibrary));
 };
 
+// Local Storage mess around =>
+
+/*
+Use localStorage.setItem or .getItem. To store an array or object we need to call
+JSON.stringify(library) when storing and JSON.parse(library) when retrieving it
+
+
+*/
+
 // Constructor
 function Book(title, author, pages, read) {
   this.title = title;
@@ -43,7 +52,7 @@ const gravity = new Book(
 const prince = new Book("Prince of Thorns", "Mark Lawrence", "280", true);
 const spot = new Book("Spot goes to the Zoo", "Arthur B. Legend", "27", false);
 
-//myLibrary.push(hatred, gravity, prince, spot);
+myLibrary.push(hatred, gravity, prince, spot);
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
   const newBook = new Book(title, author, pages, read);
@@ -73,11 +82,10 @@ const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 addBookButton.addEventListener("click", addCard);
 
-// Local Storage mess around =>
+const displayLibray = function displayLibraryOnDocument(library) {
+  for(book of library) {
+    addCard(book)
+  }
+}
 
-/*
-Use localStorage.setItem or .getItem. To store an array or object we need to call
-JSON.stringify(library) when storing and JSON.parse(library) when retrieving it
-
-
-*/
+displayLibray(myLibrary)

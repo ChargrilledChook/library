@@ -69,7 +69,7 @@ const createCard = function createCardHTML(book) {
   return `<h2>${book.title}</h2>
   <p>${book.author}</p>
   <p>${book.pages} pages</p>
-  <p>${book.read ? 'Read' : 'Not Read'}</p>`;
+  <p>${book.read ? "Read" : "Not Read"}</p>`;
 };
 
 const addCard = function addCardToDocument(book) {
@@ -84,9 +84,9 @@ const addBookButton = document.querySelector(".add-entry");
 addBookButton.addEventListener("click", addCard);
 
 const displayLibray = function displayLibraryOnDocument(library) {
-  for(book of library) {
-    addCard(book)
+  for (book of library) {
+    addCard(book);
   }
-}
+};
 
-displayLibray(myLibrary)
+displayLibray(myLibrary);

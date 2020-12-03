@@ -1,3 +1,4 @@
+// If a library key exists in local storage, parse it and set it as our library. Else return an empty array
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
     return [];

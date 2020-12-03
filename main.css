@@ -17,6 +17,11 @@ html, body {
   padding: 15px;
 }
 
+.add-entry {
+  font-size: larger;
+  border-radius: 20%;
+}
+
 main {
   background-color: rgb(226, 170, 92);
 }

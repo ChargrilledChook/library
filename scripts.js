@@ -1,4 +1,16 @@
-let myLibrary = [];
+const checkStorage = function checkStorageForLibraryArray() {
+  if (!localStorage.getItem("library")) {
+    return [];
+  } else {
+    return JSON.parse(localStorage.getItem("library"));
+  }
+};
+
+const myLibrary = checkStorage();
+
+const saveLibrary = function saveLibraryToLocalStorage() {
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+};
 
 // Constructor
 function Book(title, author, pages, read) {
@@ -31,7 +43,7 @@ const gravity = new Book(
 const prince = new Book("Prince of Thorns", "Mark Lawrence", "280", true);
 const spot = new Book("Spot goes to the Zoo", "Arthur B. Legend", "27", false);
 
-myLibrary.push(hatred, gravity, prince, spot);
+//myLibrary.push(hatred, gravity, prince, spot);
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
   const newBook = new Book(title, author, pages, read);

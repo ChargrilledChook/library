@@ -60,3 +60,12 @@ const addCard = function addCardToDocument(book) {
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 addBookButton.addEventListener("click", addCard);
+
+// Local Storage mess around =>
+
+/*
+Use localStorage.setItem or .getItem. To store an array or object we need to call
+JSON.stringify(library) when storing and JSON.parse(library) when retrieving it
+
+
+*/

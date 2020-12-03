@@ -43,10 +43,20 @@ console.table(myLibrary);
 
 // DOM / EVENT LISTENERS
 
-const testAdd = function testAdd() {
-  console.log("adding a book!");
+const createCard = function createCardHTML(book) {
+  return `<p>${book.title}</p>
+  <p>${book.author}</p>
+  <p>${book.pages}</p>
+  <p>${book.read}</p>`;
+};
+
+const addCard = function addCardToDocument(book) {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerHTML = createCard(book);
+  libraryContainer.append(newCard);
 };
 
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
-addBookButton.addEventListener("click", testAdd);
+addBookButton.addEventListener("click", addCard);

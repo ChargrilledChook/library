@@ -52,7 +52,7 @@ const gravity = new Book(
 const prince = new Book("Prince of Thorns", "Mark Lawrence", "280", true);
 const spot = new Book("Spot goes to the Zoo", "Arthur B. Legend", "27", false);
 
-myLibrary.push(hatred, gravity, prince, spot);
+//myLibrary.push(hatred, gravity, prince, spot);
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
   const newBook = new Book(title, author, pages, read);
@@ -65,9 +65,9 @@ console.table(myLibrary);
 // DOM / EVENT LISTENERS
 
 const createCard = function createCardHTML(book) {
-  return `<p>${book.title}</p>
+  return `<h2>${book.title}</h2>
   <p>${book.author}</p>
-  <p>${book.pages}</p>
+  <p>${book.pages} pages</p>
   <p>${book.read}</p>`;
 };
 

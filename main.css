@@ -44,12 +44,31 @@ main {
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   background-color: rgb(153, 153, 229);
   padding: 2em;
   margin: 1.5em;
-  max-height: 200px;
+  height: 200px;
+  width: 150px;
   border: 2px solid black;
   border-radius: 1em;
 }
 
 /* Footer */
+
+/* Form Pop-up */
+
+form {
+  padding: 2em;
+  margin: 1.5em;
+  height: 200px;
+  width: 150px;
+}
+
+fieldset {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: space-between;
+}

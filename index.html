@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +14,33 @@
         <button class="add-entry"><span>Add Book</span><br><span>+</span></button>
       </Header>
       <main class="card-container">
+        <form action="">
+          <fieldset class="input-form">
+            <legend>Add Book</legend>
+            <label>Title</br>
+              <input type="text" name="title" required id="title" >
+            </label>
+            <label>Author</br>
+              <input type="text" name="author" id="author" required>
+            </label>
+            <label>Pages</br>
+              <input type="text" name="pages" id="pages" required>
+            </label>
+            <label>Read</br>
+              <input type="checkbox" id="read" name="read">
+            </label>
+
+              <button name="submit"id="submit-btn">Submit</button>
+      </form>
+
       </main>
-    </div>
+
 
     <footer class="display-bar">
       <img src="https://stardewvalleywiki.com/mediawiki/images/2/22/White_Chicken.png" alt="a cartoon chicken">
       <p>By Chook 2020</p>
     </footer>
-
+  </div>
     <script src='scripts.js'></script>
   </body>
 </html>

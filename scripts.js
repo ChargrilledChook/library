@@ -79,9 +79,18 @@ const addCard = function addCardToDocument(book) {
   libraryContainer.append(newCard);
 };
 
+const form = document.querySelector(".form-container");
+
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
-addBookButton.addEventListener("click", addCard);
+function toggle(elt) {
+  if (elt.style.display === "none") {
+    elt.style.display = "block";
+  } else {
+    elt.style.display = "none";
+  }
+}
+//addBookButton.addEventListener("click", toggle(form));
 
 const displayLibray = function displayLibraryOnDocument(library) {
   for (book of library) {

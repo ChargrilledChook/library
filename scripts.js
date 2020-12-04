@@ -7,7 +7,7 @@ const checkStorage = function checkStorageForLibraryArray() {
   }
 };
 
-const myLibrary = checkStorage();
+let myLibrary = checkStorage();
 
 const saveLibrary = function saveLibraryToLocalStorage() {
   localStorage.setItem("library", JSON.stringify(myLibrary));
@@ -83,14 +83,12 @@ const form = document.querySelector(".form-container");
 
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
-function toggle(elt) {
-  if (elt.style.display === "none") {
-    elt.style.display = "block";
-  } else {
-    elt.style.display = "none";
-  }
+function toggle() {
+  form.style.display === "block"
+    ? (form.style.display = "none")
+    : (form.style.display = "block");
 }
-//addBookButton.addEventListener("click", toggle(form));
+addBookButton.addEventListener("click", toggle);
 
 const displayLibray = function displayLibraryOnDocument(library) {
   for (book of library) {
@@ -115,6 +113,13 @@ submitButton.addEventListener("click", (e) => {
   displayLibray(myLibrary);
   saveLibrary();
 });
+
+// This is mostly for testing and getting rid of garbage
+function deleteLibrary() {
+  myLibrary = [];
+  displayLibray(myLibrary);
+  saveLibrary();
+}
 // Running the scripts
 
 displayLibray(myLibrary);

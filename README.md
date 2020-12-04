@@ -2,11 +2,16 @@
 
 Project for Odin to practice basic object construction
 
+
+## Next Step
+
+- [ ] Turn the form into a popup
+
 ## TODO
 
 - [ ] Check specs
-- [ ] Create a method to display the library on page (most of this is done it's just hooking it up)
-- [ ] Input form
+- [x] Create a method to display the library on page (most of this is done it's just hooking it up)
+- [x] Input form
 - [ ] Read toggle
 - [ ] Delete button
 - [x] Hook up library to local storage (probably do this at the end, unless it's useful for testing?)

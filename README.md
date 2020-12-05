@@ -6,6 +6,7 @@ Project for Odin to practice basic object construction
 ## Next Step
 
 - [ ] Turn the form into a popup
+- [ ] Add a delete button to the card
 
 ## TODO
 

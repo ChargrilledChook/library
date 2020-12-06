@@ -14,12 +14,13 @@ function Book(title, author, pages, read) {
 }
 
 class Book2 {
-  constructor(title, author, pages, read, id) {
+  constructor(title, author, pages, read, library = myLibrary) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = id;
+    this.id = library.id;
+    this.parent = library.books
   }
 
   toggleRead() {

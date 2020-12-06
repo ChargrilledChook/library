@@ -56,7 +56,7 @@ const checkStorage = function checkStorageForLibraryArray() {
 };
 
 const saveLibrary = function saveLibraryToLocalStorage() {
-  localStorage.setItem("library", JSON.stringify(myLibrary));
+  return localStorage.setItem("library", JSON.stringify(myLibrary)); // CHECK THIS IF BROKEN IN CHROME - REMOVE RETURN
 };
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
@@ -68,13 +68,12 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
 // DOM Functions
 
 const createCard = function createCardHTML(book) {
-  return `<div id=book${book.id}>
+  return `
   <h2>${book.title}</h2>
   <p>${book.author}</p>
   <p>${book.pages} pages</p>
   <p>${book.read === "on" ? "Read" : "Not Read"}</p>
-  <button class="delete-btn">Delete</button>
-  </div>`;
+  <button class="delete-btn">Delete</button>`;
 };
 
 const render = function renderCardsOnDOM(library = myLibrary) {
@@ -91,6 +90,7 @@ const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
 const addCard = function addCardToDocument(book) {
   const newCard = document.createElement("div");
   newCard.classList.add("card");
+  newCard.id = `book${book.id}`
   newCard.innerHTML = createCard(book);
   libraryContainer.append(newCard);
 };

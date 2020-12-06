@@ -14,13 +14,13 @@ function Book(title, author, pages, read) {
 }
 
 class Book2 {
-  constructor(title, author, pages, read, library = myLibrary) {
+  constructor(title, author, pages, read, id, parent) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = library.id;
-    this.parent = library.books
+    this.id = id;
+    this.parent = parent
   }
 
   toggleRead() {
@@ -68,11 +68,13 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
 // DOM Functions
 
 const createCard = function createCardHTML(book) {
-  return `<h2>${book.title}</h2>
+  return `<div id=book${book.id}>
+  <h2>${book.title}</h2>
   <p>${book.author}</p>
   <p>${book.pages} pages</p>
   <p>${book.read === "on" ? "Read" : "Not Read"}</p>
-  <button class="delete-btn">Delete</button>`;
+  <button class="delete-btn">Delete</button>
+  </div>`;
 };
 
 const render = function renderCardsOnDOM(library = myLibrary) {
@@ -132,7 +134,7 @@ submitButton.addEventListener("click", (e) => {
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const read = document.querySelector("#read").value;
-  const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter);
+  const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter, myLibrary.books);
   myLibrary.idCounter++;
   myLibrary.books.push(bookToAdd);
   toggle();

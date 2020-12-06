@@ -14,13 +14,12 @@ function Book(title, author, pages, read) {
 }
 
 class Book2 {
-  constructor(title, author, pages, read, id, parent) {
+  constructor(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
     this.id = id;
-    this.parent = parent
   }
 
   toggleRead() {
@@ -134,7 +133,7 @@ submitButton.addEventListener("click", (e) => {
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const read = document.querySelector("#read").value;
-  const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter, myLibrary.books);
+  const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter);
   myLibrary.idCounter++;
   myLibrary.books.push(bookToAdd);
   toggle();

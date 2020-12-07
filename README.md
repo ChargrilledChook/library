@@ -3,26 +3,47 @@
 Project for Odin to practice basic object construction
 
 
-## Next Step
 
-- [ ] Turn the form into a popup
-- [ ] Add a delete button to the card
+
+
+
 
 ## TODO
 
-- [ ] Check specs
-- [x] Create a method to display the library on page (most of this is done it's just hooking it up)
-- [x] Input form
+### Core Logic
+
+- [ ] Add a delete button to the card
+  - [ ] ID or something similar?
 - [ ] Read toggle
-- [ ] Delete button
-- [x] Hook up library to local storage (probably do this at the end, unless it's useful for testing?)
-- [ ] Update storage when an entry is added
+ - [ ] Add function to book prototype
+- [ ] Update DOM properly on data change (adding, deleting) - care of duplication
+
+### Code Organisation
+
+- [ ] Group code into sections
+  - [ ] Elements
+  - [ ] Objects
+  - [ ] Functions
+  - [ ] Listeners
+- [ ] README
+
+### UI
+- [ ] Turn the form into a popup
+- [ ] CSS Reset
+- [ ] Fonts
+- [ ] Colours
+- [ ] Various stylings (cards, buttons, etc)
+
+### UX
+- [ ] Clear form data on submission
+- [ ] Pop down on submission
+- [ ] Fully responsive
 
 ### Bonus Features
 
+- [ ] Refactor to classes
 - [ ] Add firebase (plus option to choose?)
 - [ ] Add a view toggle (table / card)
-- [ ] Fully responsive
 - [ ] Recipie version with links and ratings
 
 Think about app flow.

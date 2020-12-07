@@ -14,11 +14,12 @@ function Book(title, author, pages, read) {
 }
 
 class Book2 {
-  constructor(title, author, pages, read) {
+  constructor(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.id = id;
   }
 
   toggleRead() {
@@ -44,7 +45,10 @@ Book.prototype.toggleRead = function () {
 // If a library key exists in local storage, parse it and set it as our library. Else return an empty array
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
-    return [];
+    return {
+      idCounter: 0,
+      books: [],
+    };
   } else {
     return JSON.parse(localStorage.getItem("library"));
   }
@@ -56,7 +60,7 @@ const saveLibrary = function saveLibraryToLocalStorage() {
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
   const newBook = new Book(title, author, pages, read);
-  library.push(newBook);
+  library.books.push(newBook);
   return library;
 };
 
@@ -83,7 +87,9 @@ function toggle() {
     : (form.style.display = "block");
 }
 
-const displayLibray = function displayLibraryOnDocument(library = myLibrary) {
+const displayLibray = function displayLibraryOnDocument(
+  library = myLibrary.books
+) {
   for (book of library) {
     addCard(book);
   }
@@ -91,8 +97,8 @@ const displayLibray = function displayLibraryOnDocument(library = myLibrary) {
 
 // This is mostly for testing and getting rid of garbage
 function deleteLibrary() {
-  myLibrary = [];
-  displayLibray(myLibrary);
+  myLibrary.books = [];
+  displayLibray(myLibrary.books);
   saveLibrary();
 }
 
@@ -101,7 +107,7 @@ function deleteLibrary() {
 let title;
 let myLibrary = checkStorage();
 
-console.table(myLibrary);
+console.table(myLibrary.books);
 
 // Listeners
 
@@ -109,22 +115,19 @@ addBookButton.addEventListener("click", toggle);
 
 // Form stuff. IDs target respective fields inside submit form
 submitButton.addEventListener("click", (e) => {
+  console.log(myLibrary);
   e.preventDefault();
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const read = document.querySelector("#read").value;
-  const bookToAdd = new Book2(title, author, pages, read);
-  myLibrary.push(bookToAdd);
+  const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter);
+  myLibrary.idCounter++;
+  myLibrary.books.push(bookToAdd);
   libraryContainer.innerHTML = "";
-  displayLibray(myLibrary);
+  displayLibray(myLibrary.books);
   saveLibrary();
 });
 
 // Running the scripts
-displayLibray(myLibrary);
-
-testLibrary = {
-  idCounter: 0,
-  books: [],
-};
+displayLibray(myLibrary.books);

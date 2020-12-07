@@ -66,7 +66,7 @@ const createCard = function createCardHTML(book) {
   return `<h2>${book.title}</h2>
   <p>${book.author}</p>
   <p>${book.pages} pages</p>
-  <p>${book.read ? "Read" : "Not Read"}</p>
+  <p>${book.read === "on" ? "Read" : "Not Read"}</p>
   <button class="delete-btn">Delete</button>`;
 };
 

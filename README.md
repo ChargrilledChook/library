@@ -8,19 +8,20 @@ Next problem: connecting objects with their DOM representation. Maintains method
 
 ### Core Logic
 
-- [ ] Add a delete button to the card
+- [x] Add a delete button to the card
   - [ ] ID or something similar?
 - [ ] Read toggle
  - [ ] Add function to book prototype
 - [ ] Update DOM properly on data change (adding, deleting) - care of duplication
+- [ ] Need to use object.assign when destringifying?
 
 ### Code Organisation
 
-- [ ] Group code into sections
-  - [ ] Elements
-  - [ ] Objects
-  - [ ] Functions
-  - [ ] Listeners
+- [x] Group code into sections
+  - [x] Elements
+  - [x] Objects
+  - [x] Functions
+  - [x] Listeners
 - [ ] README
 
 ### UI
@@ -31,13 +32,13 @@ Next problem: connecting objects with their DOM representation. Maintains method
 - [ ] Various stylings (cards, buttons, etc)
 
 ### UX
-- [ ] Clear form data on submission
-- [ ] Pop down on submission
+- [x] Clear form data on submission
+- [x] Pop down on submission
 - [ ] Fully responsive
 
 ### Bonus Features
 
-- [ ] Refactor to classes
+- [x] Refactor to classes
 - [ ] Add firebase (plus option to choose?)
 - [ ] Add a view toggle (table / card)
 - [ ] Recipie version with links and ratings

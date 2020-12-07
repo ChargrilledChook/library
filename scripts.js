@@ -114,7 +114,7 @@ submitButton.addEventListener("click", (e) => {
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const read = document.querySelector("#read").value;
-  const bookToAdd = new Book(title, author, pages, read);
+  const bookToAdd = new Book2(title, author, pages, read);
   myLibrary.push(bookToAdd);
   libraryContainer.innerHTML = "";
   displayLibray(myLibrary);
@@ -123,3 +123,8 @@ submitButton.addEventListener("click", (e) => {
 
 // Running the scripts
 displayLibray(myLibrary);
+
+testLibrary = {
+  idCounter: 0,
+  books: [],
+};

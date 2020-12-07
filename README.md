@@ -4,6 +4,8 @@ Project for Odin to practice basic object construction
 
 ## TODO
 
+Next problem: connecting objects with their DOM representation. Maintains methods and allows deletion etc
+
 ### Core Logic
 
 - [ ] Add a delete button to the card

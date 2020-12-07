@@ -1,3 +1,45 @@
+// Elements
+const form = document.querySelector(".form-container");
+const libraryContainer = document.querySelector(".card-container");
+const addBookButton = document.querySelector(".add-entry");
+const submitButton = document.querySelector("#submit-btn");
+//const deleteButton = document.querySelectorAll()
+
+// Objects
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+class Book2 {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  toggleRead() {
+    const readStatus = this.read ? false : true;
+    this.read = readStatus;
+  }
+}
+
+Book.prototype.info = function () {
+  return `${this.title} by ${this.author}, ${this.pages} pages long, ${
+    this.read ? "already read" : "not read yet"
+  }`;
+};
+
+Book.prototype.toggleRead = function () {
+  const readStatus = this.read ? false : true;
+  this.read = readStatus;
+};
+
+// Functions
+
 // If a library key exists in local storage, parse it and set it as our library. Else return an empty array
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
@@ -7,53 +49,9 @@ const checkStorage = function checkStorageForLibraryArray() {
   }
 };
 
-let myLibrary = checkStorage();
-
 const saveLibrary = function saveLibraryToLocalStorage() {
   localStorage.setItem("library", JSON.stringify(myLibrary));
 };
-
-// Local Storage mess around =>
-
-/*
-Use localStorage.setItem or .getItem. To store an array or object we need to call
-JSON.stringify(library) when storing and JSON.parse(library) when retrieving it
-
-
-*/
-
-// Constructor
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  // First way to add functions to an object
-  // this.info = function() {
-  //  return `${title} by ${author}, ${pages} pages long, ${read ? 'already read' : 'not read yet'}`
-  // }
-}
-
-// Alternate / better practice - prototypes. This way the function is only created once and shared, rather than re-created
-// every instantiation
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages long, ${
-    this.read ? "already read" : "not read yet"
-  }`;
-};
-
-// For testing
-const hatred = new Book("A little Hatred", "Joe Abercrombie", "350", true);
-const gravity = new Book(
-  "Gravity's Rainbow",
-  "David Foster Wallace",
-  "6780",
-  false
-);
-const prince = new Book("Prince of Thorns", "Mark Lawrence", "280", true);
-const spot = new Book("Spot goes to the Zoo", "Arthur B. Legend", "27", false);
-
-//myLibrary.push(hatred, gravity, prince, spot);
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
   const newBook = new Book(title, author, pages, read);
@@ -61,15 +59,14 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
   return library;
 };
 
-console.table(myLibrary);
-
-// DOM / EVENT LISTENERS
+// DOM Functions
 
 const createCard = function createCardHTML(book) {
   return `<h2>${book.title}</h2>
   <p>${book.author}</p>
   <p>${book.pages} pages</p>
-  <p>${book.read ? "Read" : "Not Read"}</p>`;
+  <p>${book.read ? "Read" : "Not Read"}</p>
+  <button class="delete-btn">Delete</button>`;
 };
 
 const addCard = function addCardToDocument(book) {
@@ -79,28 +76,37 @@ const addCard = function addCardToDocument(book) {
   libraryContainer.append(newCard);
 };
 
-const form = document.querySelector(".form-container");
-
-const libraryContainer = document.querySelector(".card-container");
-const addBookButton = document.querySelector(".add-entry");
 function toggle() {
   form.style.display === "block"
     ? (form.style.display = "none")
     : (form.style.display = "block");
 }
-addBookButton.addEventListener("click", toggle);
 
-const displayLibray = function displayLibraryOnDocument(library) {
+const displayLibray = function displayLibraryOnDocument(library = myLibrary) {
   for (book of library) {
     addCard(book);
   }
 };
 
-// Form stuff
+// This is mostly for testing and getting rid of garbage
+function deleteLibrary() {
+  myLibrary = [];
+  displayLibray(myLibrary);
+  saveLibrary();
+}
+
+// Declarations
+
 let title;
+let myLibrary = checkStorage();
 
-const submitButton = document.querySelector("#submit-btn");
+console.table(myLibrary);
 
+// Listeners
+
+addBookButton.addEventListener("click", toggle);
+
+// Form stuff. IDs target respective fields inside submit form
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
   const title = document.querySelector("#title").value;
@@ -114,12 +120,5 @@ submitButton.addEventListener("click", (e) => {
   saveLibrary();
 });
 
-// This is mostly for testing and getting rid of garbage
-function deleteLibrary() {
-  myLibrary = [];
-  displayLibray(myLibrary);
-  saveLibrary();
-}
 // Running the scripts
-
 displayLibray(myLibrary);

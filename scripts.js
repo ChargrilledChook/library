@@ -80,8 +80,8 @@ const render = function renderCardsOnDOM(library = myLibrary) {
   saveLibrary();
 };
 
-const deleteCard = function deleteCardFromDOM(library = myLibrary) {
-  library.books.pop();
+const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
+  library.books.splice(idx, 1); // Conceptually fine but the idx needs to be hooked up to the listener on the card of the item to be deleted
   render();
 };
 
@@ -92,11 +92,11 @@ const addCard = function addCardToDocument(book) {
   libraryContainer.append(newCard);
 };
 
-function toggle() {
+const toggle = function toggleFormPopup() {
   form.style.display === "block"
     ? (form.style.display = "none")
     : (form.style.display = "block");
-}
+};
 
 const displayLibray = function displayLibraryOnDocument(
   library = myLibrary.books
@@ -134,6 +134,8 @@ submitButton.addEventListener("click", (e) => {
   const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter);
   myLibrary.idCounter++;
   myLibrary.books.push(bookToAdd);
+  toggle();
+  form.reset();
   render();
 });
 

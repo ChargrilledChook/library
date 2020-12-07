@@ -24,6 +24,7 @@ class Book2 {
   toggleRead() {
     const readStatus = this.read ? false : true;
     this.read = readStatus;
+    return this; // Not really needed here but good practice as it allows us to chain methods
   }
 }
 

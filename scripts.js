@@ -74,6 +74,17 @@ const createCard = function createCardHTML(book) {
   <button class="delete-btn">Delete</button>`;
 };
 
+const render = function renderCardsOnDOM(library = myLibrary) {
+  libraryContainer.innerHTML = "";
+  displayLibray(library.books);
+  saveLibrary();
+};
+
+const deleteCard = function deleteCardFromDOM(library = myLibrary) {
+  library.books.pop();
+  render();
+};
+
 const addCard = function addCardToDocument(book) {
   const newCard = document.createElement("div");
   newCard.classList.add("card");
@@ -115,7 +126,6 @@ addBookButton.addEventListener("click", toggle);
 
 // Form stuff. IDs target respective fields inside submit form
 submitButton.addEventListener("click", (e) => {
-  console.log(myLibrary);
   e.preventDefault();
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
@@ -124,9 +134,7 @@ submitButton.addEventListener("click", (e) => {
   const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter);
   myLibrary.idCounter++;
   myLibrary.books.push(bookToAdd);
-  libraryContainer.innerHTML = "";
-  displayLibray(myLibrary.books);
-  saveLibrary();
+  render();
 });
 
 // Running the scripts

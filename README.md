@@ -25,7 +25,7 @@ Next problem: connecting objects with their DOM representation. Maintains method
 - [ ] README
 
 ### UI
-- [ ] Turn the form into a popup
+- [x] Turn the form into a popup
 - [ ] CSS Reset
 - [ ] Fonts
 - [ ] Colours

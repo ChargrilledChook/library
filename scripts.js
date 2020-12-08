@@ -44,7 +44,7 @@ class Book {
     <p>${this.pages} pages</p>
     <div>${
       this.read === true ? "Read" : "Not Read"
-    }</div><input class="read-tick" type="checkbox">
+    }<input class="read-tick" type="checkbox"></div>
     <button class="delete-btn">Delete</button>`;
   }
 

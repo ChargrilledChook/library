@@ -4,6 +4,8 @@ html, body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: #edca82;
+  color:rgb(49, 36, 10);
 }
 
 .wrapper {
@@ -16,7 +18,7 @@ html, body {
 /* Header */
 
 .display-bar {
-  background-color: rgb(36, 192, 140);
+  background-color:#097770;
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -30,7 +32,7 @@ html, body {
 /* Main Container */
 
 main {
-  background-color: rgb(226, 170, 92);
+  background-color: #edca82;
 }
 
 .card-container {
@@ -46,12 +48,12 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: rgb(153, 153, 229);
+  background-color: #a9c0a6;
   padding: 2em;
   margin: 1.5em;
   height: 200px;
   width: 150px;
-  border: 2px solid black;
+  border: 2px solid rgb(49, 36, 10);
   border-radius: 1em;
 }
 
@@ -81,5 +83,3 @@ fieldset {
   align-items: space-between;
   border-style: none;
 }
-
-

@@ -14,6 +14,7 @@ class Book {
     this.id = id;
   }
 
+  // Initialises all DOM logic for the object
   init() {
     this.element = document.createElement("div");
     this.element.classList.add("card");
@@ -33,6 +34,7 @@ class Book {
     this.tickBox.addEventListener("change", () => {
       this.toggleRead();
       this.element.innerHTML = this.createCard(); // Probably a better way to do this than destroying the entire card and readding listeners
+      this.tickBox.checked = this.read.toString();
       this.addListeners();
     });
   }
@@ -134,16 +136,20 @@ addBookButton.addEventListener("click", toggle);
 // Form stuff. IDs target respective fields inside submit form
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
+  const isFormValid = addBookForm.checkValidity();
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const read = document.querySelector("#read").checked;
-  const bookToAdd = new Book(title, author, pages, read, myLibrary.idCounter);
-  myLibrary.idCounter++;
-  myLibrary.books.push(bookToAdd);
-  toggle();
-  addBookForm.reset();
-  render();
+
+  if (isFormValid) {
+    const bookToAdd = new Book(title, author, pages, read, myLibrary.idCounter);
+    myLibrary.idCounter++;
+    myLibrary.books.push(bookToAdd);
+    toggle();
+    addBookForm.reset();
+    render();
+  }
 });
 
 // Declarations --------------------------------------------

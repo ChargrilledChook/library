@@ -19,15 +19,12 @@ class Book {
     this.element.classList.add("card");
     this.element.id = `book${this.id}`;
     this.element.innerHTML = this.createCard();
-    console.log(this.element.id);
     libraryContainer.append(this.element);
     this.addListeners();
   }
 
   addListeners() {
     this.deleteButton = this.element.querySelector(".delete-btn");
-    console.log(this.deleteButton);
-    console.log;
     this.deleteButton.addEventListener("click", () => {
       deleteBook(this.id);
     });
@@ -88,6 +85,7 @@ const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
   displayLibray(library.books);
   saveLibrary();
+  console.table(library.books);
 };
 
 const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
@@ -124,10 +122,7 @@ function deleteBook(bookID) {
 
 // Declarations
 
-let title;
-let myLibrary = checkStorage();
-
-console.table(myLibrary.books);
+const myLibrary = checkStorage();
 
 // Listeners
 
@@ -150,5 +145,3 @@ submitButton.addEventListener("click", (e) => {
 
 // Running the scripts
 displayLibray(myLibrary.books);
-
-// Experimental

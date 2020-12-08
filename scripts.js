@@ -42,6 +42,12 @@ Book.prototype.toggleRead = function () {
 
 // Functions
 
+// When storing class objects as JSON they become generic objects when deserialised. They
+// need to be reconverted each time we retrieve them from storage
+const revive = function reviveObjectsToBooks(obj) {
+  return new Book2(obj.title, obj.author, obj.pages, obj.read, obj.id);
+};
+
 // If a library key exists in local storage, parse it and set it as our library. Else return an empty array
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
@@ -50,7 +56,9 @@ const checkStorage = function checkStorageForLibraryArray() {
       books: [],
     };
   } else {
-    return JSON.parse(localStorage.getItem("library"));
+    const deserialised = JSON.parse(localStorage.getItem("library"));
+    deserialised.books = deserialised.books.map(revive);
+    return deserialised;
   }
 };
 
@@ -89,7 +97,7 @@ const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
 const addCard = function addCardToDocument(book) {
   const newCard = document.createElement("div");
   newCard.classList.add("card");
-  newCard.id = `book${book.id}`
+  newCard.id = `book${book.id}`;
   newCard.innerHTML = createCard(book);
   libraryContainer.append(newCard);
 };
@@ -143,3 +151,5 @@ submitButton.addEventListener("click", (e) => {
 
 // Running the scripts
 displayLibray(myLibrary.books);
+
+// Experimental

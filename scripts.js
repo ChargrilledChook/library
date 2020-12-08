@@ -19,7 +19,18 @@ class Book {
     this.element.classList.add("card");
     this.element.id = `book${this.id}`;
     this.element.innerHTML = this.createCard();
+    console.log(this.element.id);
     libraryContainer.append(this.element);
+    this.addListeners();
+  }
+
+  addListeners() {
+    this.deleteButton = this.element.querySelector(".delete-btn");
+    console.log(this.deleteButton);
+    console.log;
+    this.deleteButton.addEventListener("click", () => {
+      deleteBook(this.id);
+    });
   }
 
   createCard() {
@@ -27,7 +38,7 @@ class Book {
     <h2>${this.title}</h2>
     <p>${this.author}</p>
     <p>${this.pages} pages</p>
-    <p>${this.read === true ? "Read" : "Not Read"}</p>
+    <p>${this.read === true ? "Read" : "Not Read"}<input type="checkbox"></p>
     <button class="delete-btn">Delete</button>`;
   }
 
@@ -103,6 +114,12 @@ function deleteLibrary() {
   myLibrary.books = [];
   displayLibray(myLibrary.books);
   saveLibrary();
+}
+
+function deleteBook(bookID) {
+  const idx = myLibrary.books.findIndex((book) => book.id === bookID);
+  myLibrary.books.splice(idx, 1);
+  render();
 }
 
 // Declarations

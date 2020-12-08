@@ -1,25 +1,34 @@
 // Elements
-const form = document.querySelector(".form-container");
+const addBookForm = document.querySelector(".form-container");
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 const submitButton = document.querySelector("#submit-btn");
-//const deleteButton = document.querySelectorAll()
 
 // Objects
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-class Book2 {
+class Book {
   constructor(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
     this.id = id;
+  }
+
+  init() {
+    this.element = document.createElement("div");
+    this.element.classList.add("card");
+    this.element.id = `book${this.id}`;
+    this.element.innerHTML = this.createCard();
+    libraryContainer.append(this.element);
+  }
+
+  createCard() {
+    return `
+    <h2>${this.title}</h2>
+    <p>${this.author}</p>
+    <p>${this.pages} pages</p>
+    <p>${this.read === "on" ? "Read" : "Not Read"}</p>
+    <button class="delete-btn">Delete</button>`;
   }
 
   toggleRead() {
@@ -29,26 +38,16 @@ class Book2 {
   }
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages long, ${
-    this.read ? "already read" : "not read yet"
-  }`;
-};
-
-Book.prototype.toggleRead = function () {
-  const readStatus = this.read ? false : true;
-  this.read = readStatus;
-};
-
 // Functions
 
 // When storing class objects as JSON they become generic objects when deserialised. They
 // need to be reconverted each time we retrieve them from storage
 const revive = function reviveObjectsToBooks(obj) {
-  return new Book2(obj.title, obj.author, obj.pages, obj.read, obj.id);
+  return new Book(obj.title, obj.author, obj.pages, obj.read, obj.id);
 };
 
-// If a library key exists in local storage, parse it and set it as our library. Else return an empty array
+// If a library key exists in local storage, parse it and set it as our library. Else return a default library object
+// with a counter for ids and an array for books
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
     return {
@@ -63,7 +62,7 @@ const checkStorage = function checkStorageForLibraryArray() {
 };
 
 const saveLibrary = function saveLibraryToLocalStorage() {
-  return localStorage.setItem("library", JSON.stringify(myLibrary)); // CHECK THIS IF BROKEN IN CHROME - REMOVE RETURN
+  return localStorage.setItem("library", JSON.stringify(myLibrary));
 };
 
 const addBook = function addBookToLibrary(title, author, pages, read, library) {
@@ -73,15 +72,6 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
 };
 
 // DOM Functions
-
-const createCard = function createCardHTML(book) {
-  return `
-  <h2>${book.title}</h2>
-  <p>${book.author}</p>
-  <p>${book.pages} pages</p>
-  <p>${book.read === "on" ? "Read" : "Not Read"}</p>
-  <button class="delete-btn">Delete</button>`;
-};
 
 const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
@@ -94,25 +84,17 @@ const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
   render();
 };
 
-const addCard = function addCardToDocument(book) {
-  const newCard = document.createElement("div");
-  newCard.classList.add("card");
-  newCard.id = `book${book.id}`;
-  newCard.innerHTML = createCard(book);
-  libraryContainer.append(newCard);
-};
-
 const toggle = function toggleFormPopup() {
-  form.style.display === "block"
-    ? (form.style.display = "none")
-    : (form.style.display = "block");
+  addBookForm.style.display === "block"
+    ? (addBookForm.style.display = "none")
+    : (addBookForm.style.display = "block");
 };
 
 const displayLibray = function displayLibraryOnDocument(
   library = myLibrary.books
 ) {
   for (book of library) {
-    addCard(book);
+    book.init();
   }
 };
 
@@ -141,11 +123,11 @@ submitButton.addEventListener("click", (e) => {
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const read = document.querySelector("#read").value;
-  const bookToAdd = new Book2(title, author, pages, read, myLibrary.idCounter);
+  const bookToAdd = new Book(title, author, pages, read, myLibrary.idCounter);
   myLibrary.idCounter++;
   myLibrary.books.push(bookToAdd);
   toggle();
-  form.reset();
+  addBookForm.reset();
   render();
 });
 

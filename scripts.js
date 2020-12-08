@@ -1,10 +1,10 @@
-// Elements
+// Elements --------------------------------------------
 const addBookForm = document.querySelector(".form-container");
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 const submitButton = document.querySelector("#submit-btn");
 
-// Objects
+// Objects --------------------------------------------
 class Book {
   constructor(title, author, pages, read, id) {
     this.title = title;
@@ -28,6 +28,13 @@ class Book {
     this.deleteButton.addEventListener("click", () => {
       deleteBook(this.id);
     });
+
+    this.tickBox = this.element.querySelector(".read-tick");
+    this.tickBox.addEventListener("change", () => {
+      this.toggleRead();
+      this.element.innerHTML = this.createCard();
+      this.addListeners();
+    });
   }
 
   createCard() {
@@ -35,7 +42,9 @@ class Book {
     <h2>${this.title}</h2>
     <p>${this.author}</p>
     <p>${this.pages} pages</p>
-    <p>${this.read === true ? "Read" : "Not Read"}<input type="checkbox"></p>
+    <div>${
+      this.read === true ? "Read" : "Not Read"
+    }</div><input class="read-tick" type="checkbox">
     <button class="delete-btn">Delete</button>`;
   }
 
@@ -46,7 +55,7 @@ class Book {
   }
 }
 
-// Functions
+// Functions --------------------------------------------
 
 // When storing class objects as JSON they become generic objects when deserialised. They
 // need to be reconverted each time we retrieve them from storage
@@ -79,8 +88,7 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
   return library;
 };
 
-// DOM Functions
-
+// DOM Functions --------------------------------------------
 const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
   displayLibray(library.books);
@@ -120,12 +128,7 @@ function deleteBook(bookID) {
   render();
 }
 
-// Declarations
-
-const myLibrary = checkStorage();
-
-// Listeners
-
+// Listeners --------------------------------------------
 addBookButton.addEventListener("click", toggle);
 
 // Form stuff. IDs target respective fields inside submit form
@@ -143,5 +146,8 @@ submitButton.addEventListener("click", (e) => {
   render();
 });
 
-// Running the scripts
+// Declarations --------------------------------------------
+const myLibrary = checkStorage();
+
+// Running the scripts --------------------------------------------
 displayLibray(myLibrary.books);

@@ -8,7 +8,7 @@ Project for Odin to practice basic object construction
 
 ### Core Logic
 
-- [ ] Read toggle
+- [x] Read toggle - Working but doesn't look good visually
 - [ ] Form validation
 
 ### Code Organisation

@@ -32,7 +32,7 @@ class Book {
     this.tickBox = this.element.querySelector(".read-tick");
     this.tickBox.addEventListener("change", () => {
       this.toggleRead();
-      this.element.innerHTML = this.createCard();
+      this.element.innerHTML = this.createCard(); // Probably a better way to do this than destroying the entire card and readding listeners
       this.addListeners();
     });
   }

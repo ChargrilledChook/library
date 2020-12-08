@@ -27,7 +27,7 @@ class Book {
     <h2>${this.title}</h2>
     <p>${this.author}</p>
     <p>${this.pages} pages</p>
-    <p>${this.read === "on" ? "Read" : "Not Read"}</p>
+    <p>${this.read === true ? "Read" : "Not Read"}</p>
     <button class="delete-btn">Delete</button>`;
   }
 
@@ -122,7 +122,7 @@ submitButton.addEventListener("click", (e) => {
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
-  const read = document.querySelector("#read").value;
+  const read = document.querySelector("#read").checked;
   const bookToAdd = new Book(title, author, pages, read, myLibrary.idCounter);
   myLibrary.idCounter++;
   myLibrary.books.push(bookToAdd);

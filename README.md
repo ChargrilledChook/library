@@ -4,16 +4,12 @@ Project for Odin to practice basic object construction
 
 ## TODO
 
-Next problem: connecting objects with their DOM representation. Maintains methods and allows deletion etc
+2
 
 ### Core Logic
 
-- [x] Add a delete button to the card
-  - [ ] ID or something similar?
 - [ ] Read toggle
- - [ ] Add function to book prototype
-- [ ] Update DOM properly on data change (adding, deleting) - care of duplication
-- [ ] Need to use object.assign when destringifying?
+- [ ] Form validation
 
 ### Code Organisation
 

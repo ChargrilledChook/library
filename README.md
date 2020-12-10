@@ -4,8 +4,6 @@ Project for Odin to practice basic object construction
 
 ## TODO
 
-2
-
 ### Core Logic
 
 - [x] Read toggle - Working but doesn't look good visually
@@ -34,6 +32,8 @@ Project for Odin to practice basic object construction
 
 ### Bonus Features
 
+- [ ] Convert library object to a class
+- [ ] Add different types of 'book' objects ie movie, series
 - [x] Refactor to classes
 - [ ] Add firebase (plus option to choose?)
 - [ ] Add a view toggle (table / card)

@@ -1,11 +1,11 @@
 /* Contents
-1 Elements
-2 Classes
-3 Functions
-4 DOM Functions
-5 Listeners
-6 Declarations
-7 Run script
+ Elements
+ Classes
+ Functions
+ DOM Functions
+ Listeners
+ Declarations
+ Run script
 */
 
 //  Elements --------------------------------------------
@@ -96,13 +96,7 @@ const saveLibrary = function saveLibraryToLocalStorage() {
   return localStorage.setItem("library", JSON.stringify(myLibrary));
 };
 
-// const addBook = function addBookToLibrary(title, author, pages, read, library) {
-//   const newBook = new Book(title, author, pages, read);
-//   library.books.push(newBook);
-//   return library;
-// };
-
-// 4 DOM Functions --------------------------------------------
+// DOM Functions --------------------------------------------
 
 const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
@@ -110,11 +104,6 @@ const render = function renderCardsOnDOM(library = myLibrary) {
   saveLibrary();
   console.table(library.books);
 };
-
-// const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
-//   library.books.splice(idx, 1); // Conceptually fine but the idx needs to be hooked up to the listener on the card of the item to be deleted
-//   render();
-// };
 
 const toggle = function toggleFormPopup() {
   addBookForm.style.display === "block"
@@ -130,18 +119,11 @@ const displayLibray = function displayLibraryOnDocument(
   }
 };
 
-// This is mostly for testing / debugging and getting rid of garbage
-function deleteLibrary() {
-  myLibrary.books = [];
-  displayLibray(myLibrary.books);
-  saveLibrary();
-}
-
-function deleteBook(bookID) {
+const deleteBook = function deleteBook(bookID) {
   const idx = myLibrary.books.findIndex((book) => book.id === bookID);
   myLibrary.books.splice(idx, 1);
   render();
-}
+};
 
 // Listeners --------------------------------------------
 
@@ -170,6 +152,6 @@ submitButton.addEventListener("click", (e) => {
 
 const myLibrary = checkStorage();
 
-// 7 Running the scripts --------------------------------------------
+// Running the scripts --------------------------------------------
 
 displayLibray(myLibrary.books);

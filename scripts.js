@@ -1,10 +1,20 @@
-// Elements --------------------------------------------
+/* Contents
+1 Elements
+2 Classes
+3 Functions
+4 DOM Functions
+5 Listeners
+6 Declarations
+7 Run script
+*/
+
+// 1 Elements --------------------------------------------
 const addBookForm = document.querySelector(".form-container");
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 const submitButton = document.querySelector("#submit-btn");
 
-// Objects --------------------------------------------
+// 2 Classes --------------------------------------------
 class Book {
   constructor(title, author, pages, read, id) {
     this.title = title;
@@ -57,7 +67,7 @@ class Book {
   }
 }
 
-// Functions --------------------------------------------
+// 3 Functions --------------------------------------------
 
 // When storing class objects as JSON they become generic objects when deserialised. They
 // need to be reconverted each time we retrieve them from storage
@@ -90,7 +100,7 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
   return library;
 };
 
-// DOM Functions --------------------------------------------
+// 4 DOM Functions --------------------------------------------
 const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
   displayLibray(library.books);
@@ -130,7 +140,7 @@ function deleteBook(bookID) {
   render();
 }
 
-// Listeners --------------------------------------------
+// 5 Listeners --------------------------------------------
 addBookButton.addEventListener("click", toggle);
 
 // Form stuff. IDs target respective fields inside submit form
@@ -152,8 +162,8 @@ submitButton.addEventListener("click", (e) => {
   }
 });
 
-// Declarations --------------------------------------------
+// 6 Declarations --------------------------------------------
 const myLibrary = checkStorage();
 
-// Running the scripts --------------------------------------------
+// 7 Running the scripts --------------------------------------------
 displayLibray(myLibrary.books);

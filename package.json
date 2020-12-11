@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ChargrilledChook/library/issues"
   },
-  "homepage": "https://github.com/ChargrilledChook/library#readme"
+  "homepage": "https://github.com/ChargrilledChook/library#readme",
+  "devDependencies": {
+    "eslint": "^7.15.0"
+  }
 }

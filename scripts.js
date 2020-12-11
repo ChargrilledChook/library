@@ -158,37 +158,3 @@ const myLibrary = checkStorage();
 // Running the scripts --------------------------------------------
 
 displayLibray(myLibrary.books);
-
-class LibraryTest {
-  constructor(container, idCounter = 0, books = []) {
-    this.container = container;
-    this.idCounter = idCounter;
-    this.books = books;
-  }
-
-  deleteBook(bookID) {
-    const idx = this.books.findIndex((book) => book.id === bookID);
-    this.books.splice(idx, 1);
-    render();
-    return this;
-  }
-
-  addBookToLibrary(book) {
-    this.books.push(book);
-    this.idCounter += 1;
-    return this;
-  }
-
-  renderCards() {
-    this.container.innerHTML = "";
-    displayLibray(this.books);
-    saveLibrary();
-    console.table(this.books);
-  }
-  displayBooks() {
-    for (const book of this.books) {
-      book.init();
-    }
-    return this;
-  }
-}

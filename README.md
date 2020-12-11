@@ -1,13 +1,19 @@
 # Library
 
-Project for Odin to practice basic object construction
+Project for Odin to practice basic object construction.
+
+Includes local storage.
+
+View live [here](https://chargrilledchook.github.io/library/).
 
 ## TODO
 
-### Core Logic
+### Core Logic / Spec
 
 - [x] Read toggle - Working but doesn't look good visually
-- [x] Form validation - Kind of but a bit hacky
+  - [ ] Change from checkbox to button
+- [x] Form validation - Kind of working but a bit hacky
+  - [ ] Redo
 
 ### Code Organisation
 
@@ -16,7 +22,7 @@ Project for Odin to practice basic object construction
   - [x] Objects
   - [x] Functions
   - [x] Listeners
-- [ ] README
+- [ ] Update README with project info and reflections
 
 ### UI
 - [x] Turn the form into a popup

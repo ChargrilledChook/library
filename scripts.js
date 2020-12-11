@@ -39,7 +39,7 @@ class Book {
   addListeners() {
     this.deleteButton = this.element.querySelector(".delete-btn");
     this.deleteButton.addEventListener("click", () => {
-      deleteBook(this.id);
+      myLibrary.deleteBook(this.id);
     });
 
     this.tickBox = this.element.querySelector(".read-tick");
@@ -81,13 +81,8 @@ const revive = function reviveObjectsToBooks(obj) {
 // If a library key exists in local storage, parse it and set it as our library.
 // Else return a default library object with a counter for ids and an array for books
 const checkStorage = function checkStorageForLibraryArray() {
-  if (!localStorage.getItem("library")) {
-    const defaultLibrary = {
-      idCounter: 0,
-      books: [],
-    };
-    return defaultLibrary;
-  }
+  if (!localStorage.getItem("library")) return new Library(libraryContainer);
+
   const deserialisedLibrary = JSON.parse(localStorage.getItem("library"));
   deserialisedLibrary.books = deserialisedLibrary.books.map(revive);
   return deserialisedLibrary;
@@ -101,12 +96,12 @@ const saveLibrary = function saveLibraryToLocalStorage() {
 
 // Probably a more efficient way to render than redoing the entire screen every time;
 // but for now it's not noticeable
-const render = function renderCardsOnDOM(library = myLibrary) {
-  libraryContainer.innerHTML = "";
-  displayLibray(library.books);
-  saveLibrary();
-  console.table(library.books);
-};
+// const render = function renderCardsOnDOM(library = myLibrary) {
+//   libraryContainer.innerHTML = "";
+//   displayLibray(library.books);
+//   saveLibrary();
+//   console.table(library.books);
+// };
 
 const toggle = function toggleFormPopup() {
   addBookForm.style.display === "block"
@@ -114,19 +109,19 @@ const toggle = function toggleFormPopup() {
     : (addBookForm.style.display = "block");
 };
 
-const displayLibray = function displayLibraryOnDocument(
-  library = myLibrary.books
-) {
-  for (const book of library) {
-    book.init();
-  }
-};
+// const displayLibray = function displayLibraryOnDocument(
+//   library = myLibrary.books
+// ) {
+//   for (const book of library) {
+//     book.init();
+//   }
+// };
 
-const deleteBook = function deleteBook(bookID) {
-  const idx = myLibrary.books.findIndex((book) => book.id === bookID);
-  myLibrary.books.splice(idx, 1);
-  render();
-};
+// const deleteBook = function deleteBook(bookID) {
+//   const idx = myLibrary.books.findIndex((book) => book.id === bookID);
+//   myLibrary.books.splice(idx, 1);
+//   render();
+// };
 
 // Listeners --------------------------------------------
 
@@ -143,48 +138,39 @@ submitButton.addEventListener("click", (e) => {
 
   if (isFormValid) {
     const bookToAdd = new Book(title, author, pages, read, myLibrary.idCounter);
-    myLibrary.idCounter += 1;
-    myLibrary.books.push(bookToAdd);
+    myLibrary.addBook(bookToAdd);
     toggle();
     addBookForm.reset();
-    render();
+    myLibrary.renderCards();
   }
 });
 
-// Declarations --------------------------------------------
-
-const myLibrary = checkStorage();
-
-// Running the scripts --------------------------------------------
-
-displayLibray(myLibrary.books);
-
-class LibraryTest {
+class Library {
   constructor(container, idCounter = 0, books = []) {
     this.container = container;
     this.idCounter = idCounter;
     this.books = books;
   }
+  renderCards() {
+    this.container.innerHTML = "";
+    this.displayBooks();
+    saveLibrary();
+    console.table(this.books);
+  }
 
   deleteBook(bookID) {
     const idx = this.books.findIndex((book) => book.id === bookID);
     this.books.splice(idx, 1);
-    render();
+    this.renderCards();
     return this;
   }
 
-  addBookToLibrary(book) {
+  addBook(book) {
     this.books.push(book);
     this.idCounter += 1;
     return this;
   }
 
-  renderCards() {
-    this.container.innerHTML = "";
-    displayLibray(this.books);
-    saveLibrary();
-    console.table(this.books);
-  }
   displayBooks() {
     for (const book of this.books) {
       book.init();
@@ -192,3 +178,10 @@ class LibraryTest {
     return this;
   }
 }
+// Declarations --------------------------------------------
+
+const myLibrary = new Library(libraryContainer);
+
+// Running the scripts --------------------------------------------
+
+myLibrary.displayBooks();

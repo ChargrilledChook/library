@@ -9,12 +9,14 @@
 */
 
 // 1 Elements --------------------------------------------
+
 const addBookForm = document.querySelector(".form-container");
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 const submitButton = document.querySelector("#submit-btn");
 
 // 2 Classes --------------------------------------------
+
 class Book {
   constructor(title, author, pages, read, id) {
     this.title = title;
@@ -101,6 +103,7 @@ const addBook = function addBookToLibrary(title, author, pages, read, library) {
 };
 
 // 4 DOM Functions --------------------------------------------
+
 const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
   displayLibray(library.books);
@@ -141,6 +144,7 @@ function deleteBook(bookID) {
 }
 
 // 5 Listeners --------------------------------------------
+
 addBookButton.addEventListener("click", toggle);
 
 // Form stuff. IDs target respective fields inside submit form
@@ -163,7 +167,9 @@ submitButton.addEventListener("click", (e) => {
 });
 
 // 6 Declarations --------------------------------------------
+
 const myLibrary = checkStorage();
 
 // 7 Running the scripts --------------------------------------------
+
 displayLibray(myLibrary.books);

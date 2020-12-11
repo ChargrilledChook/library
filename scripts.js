@@ -82,14 +82,15 @@ const revive = function reviveObjectsToBooks(obj) {
 // Else return a default library object with a counter for ids and an array for books
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
-    return {
+    const defaultLibrary = {
       idCounter: 0,
       books: [],
     };
+    return defaultLibrary;
   }
-  const deserialised = JSON.parse(localStorage.getItem("library"));
-  deserialised.books = deserialised.books.map(revive);
-  return deserialised;
+  const deserialisedLibrary = JSON.parse(localStorage.getItem("library"));
+  deserialisedLibrary.books = deserialisedLibrary.books.map(revive);
+  return deserialisedLibrary;
 };
 
 const saveLibrary = function saveLibraryToLocalStorage() {
@@ -98,6 +99,8 @@ const saveLibrary = function saveLibraryToLocalStorage() {
 
 // DOM Functions --------------------------------------------
 
+// Probably a more efficient way to render than redoing the entire screen every time;
+// but for now it's not noticeable
 const render = function renderCardsOnDOM(library = myLibrary) {
   libraryContainer.innerHTML = "";
   displayLibray(library.books);
@@ -155,3 +158,37 @@ const myLibrary = checkStorage();
 // Running the scripts --------------------------------------------
 
 displayLibray(myLibrary.books);
+
+class LibraryTest {
+  constructor(container, idCounter = 0, books = []) {
+    this.container = container;
+    this.idCounter = idCounter;
+    this.books = books;
+  }
+
+  deleteBook(bookID) {
+    const idx = this.books.findIndex((book) => book.id === bookID);
+    this.books.splice(idx, 1);
+    render();
+    return this;
+  }
+
+  addBookToLibrary(book) {
+    this.books.push(book);
+    this.idCounter += 1;
+    return this;
+  }
+
+  renderCards() {
+    this.container.innerHTML = "";
+    displayLibray(this.books);
+    saveLibrary();
+    console.table(this.books);
+  }
+  displayBooks() {
+    for (const book of this.books) {
+      book.init();
+    }
+    return this;
+  }
+}

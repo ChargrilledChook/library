@@ -8,14 +8,14 @@
 7 Run script
 */
 
-// 1 Elements --------------------------------------------
+//  Elements --------------------------------------------
 
 const addBookForm = document.querySelector(".form-container");
 const libraryContainer = document.querySelector(".card-container");
 const addBookButton = document.querySelector(".add-entry");
 const submitButton = document.querySelector("#submit-btn");
 
-// 2 Classes --------------------------------------------
+//  Classes --------------------------------------------
 
 class Book {
   constructor(title, author, pages, read, id) {
@@ -45,7 +45,8 @@ class Book {
     this.tickBox = this.element.querySelector(".read-tick");
     this.tickBox.addEventListener("change", () => {
       this.toggleRead();
-      this.element.innerHTML = this.createCard(); // Probably a better way to do this than destroying the entire card and readding listeners
+      // Probably a better way to do this than destroying the entire card and readding listeners
+      this.element.innerHTML = this.createCard();
       this.tickBox.checked = this.read.toString();
       this.addListeners();
     });
@@ -63,13 +64,13 @@ class Book {
   }
 
   toggleRead() {
-    const readStatus = this.read ? false : true;
+    const readStatus = !this.read;
     this.read = readStatus;
     return this; // Not really needed here but good practice as it allows us to chain methods
   }
 }
 
-// 3 Functions --------------------------------------------
+// Functions --------------------------------------------
 
 // When storing class objects as JSON they become generic objects when deserialised. They
 // need to be reconverted each time we retrieve them from storage
@@ -77,30 +78,29 @@ const revive = function reviveObjectsToBooks(obj) {
   return new Book(obj.title, obj.author, obj.pages, obj.read, obj.id);
 };
 
-// If a library key exists in local storage, parse it and set it as our library. Else return a default library object
-// with a counter for ids and an array for books
+// If a library key exists in local storage, parse it and set it as our library.
+// Else return a default library object with a counter for ids and an array for books
 const checkStorage = function checkStorageForLibraryArray() {
   if (!localStorage.getItem("library")) {
     return {
       idCounter: 0,
       books: [],
     };
-  } else {
-    const deserialised = JSON.parse(localStorage.getItem("library"));
-    deserialised.books = deserialised.books.map(revive);
-    return deserialised;
   }
+  const deserialised = JSON.parse(localStorage.getItem("library"));
+  deserialised.books = deserialised.books.map(revive);
+  return deserialised;
 };
 
 const saveLibrary = function saveLibraryToLocalStorage() {
   return localStorage.setItem("library", JSON.stringify(myLibrary));
 };
 
-const addBook = function addBookToLibrary(title, author, pages, read, library) {
-  const newBook = new Book(title, author, pages, read);
-  library.books.push(newBook);
-  return library;
-};
+// const addBook = function addBookToLibrary(title, author, pages, read, library) {
+//   const newBook = new Book(title, author, pages, read);
+//   library.books.push(newBook);
+//   return library;
+// };
 
 // 4 DOM Functions --------------------------------------------
 
@@ -111,10 +111,10 @@ const render = function renderCardsOnDOM(library = myLibrary) {
   console.table(library.books);
 };
 
-const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
-  library.books.splice(idx, 1); // Conceptually fine but the idx needs to be hooked up to the listener on the card of the item to be deleted
-  render();
-};
+// const deleteCard = function deleteCardFromDOM(idx, library = myLibrary) {
+//   library.books.splice(idx, 1); // Conceptually fine but the idx needs to be hooked up to the listener on the card of the item to be deleted
+//   render();
+// };
 
 const toggle = function toggleFormPopup() {
   addBookForm.style.display === "block"
@@ -125,12 +125,12 @@ const toggle = function toggleFormPopup() {
 const displayLibray = function displayLibraryOnDocument(
   library = myLibrary.books
 ) {
-  for (book of library) {
+  for (const book of library) {
     book.init();
   }
 };
 
-// This is mostly for testing and getting rid of garbage
+// This is mostly for testing / debugging and getting rid of garbage
 function deleteLibrary() {
   myLibrary.books = [];
   displayLibray(myLibrary.books);
@@ -143,7 +143,7 @@ function deleteBook(bookID) {
   render();
 }
 
-// 5 Listeners --------------------------------------------
+// Listeners --------------------------------------------
 
 addBookButton.addEventListener("click", toggle);
 
@@ -158,7 +158,7 @@ submitButton.addEventListener("click", (e) => {
 
   if (isFormValid) {
     const bookToAdd = new Book(title, author, pages, read, myLibrary.idCounter);
-    myLibrary.idCounter++;
+    myLibrary.idCounter += 1;
     myLibrary.books.push(bookToAdd);
     toggle();
     addBookForm.reset();
@@ -166,7 +166,7 @@ submitButton.addEventListener("click", (e) => {
   }
 });
 
-// 6 Declarations --------------------------------------------
+// Declarations --------------------------------------------
 
 const myLibrary = checkStorage();
 

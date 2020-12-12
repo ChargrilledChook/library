@@ -30,6 +30,7 @@ class Book {
   init() {
     this.element = document.createElement("div");
     this.element.classList.add("card");
+    this.element.classList.add("grow");
     this.element.id = `book${this.id}`;
     this.element.innerHTML = this.createCard();
     libraryContainer.append(this.element);

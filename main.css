@@ -79,6 +79,7 @@ main {
   background-color: whitesmoke;
 }
 
+/* Citation - https://stackoverflow.com/questions/20944334/how-to-center-a-modal-window-on-a-page */
 .modal {
   width: 300px;
   height: 300px;

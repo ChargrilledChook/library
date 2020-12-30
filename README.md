@@ -16,7 +16,7 @@ View live [here](https://chargrilledchook.github.io/library/).
   - [ ] Redo
 
 ### Code Organisation
-
+s
 - [x] Group code into sections
   - [x] Elements
   - [x] Objects
